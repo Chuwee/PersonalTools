@@ -1,3 +1,4 @@
+import subprocess
 dic = {
     "A" : 4,
     "B" : 8,
@@ -19,12 +20,14 @@ def main():
             na+=str(dic[c])
     ina=int(na)
     p=a[0] + str(la) + na + str(ina+la) + str(ina*la) + a[2]
-    print(p)
-    t = input("Yes?")
+    subprocess.run("xclip -selection clipboard", universal_newlines=True, input=p, shell=True)
+    t = input("")
     if t == "Y":
         return
     else:
         p+=a
+    subprocess.run("xclip -selection clipboard", universal_newlines=True, input=p, shell=True)
     print(p)
+
 
 main()
