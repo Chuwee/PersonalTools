@@ -1,4 +1,5 @@
 import subprocess
+import platform
 dic = {
     "A" : 4,
     "B" : 8,
@@ -10,6 +11,8 @@ dic = {
     "T" : 7,
 }
 
+MACOS_RETURN = "Darwin"
+
 def main():
     a = input("")
     la = len(a)
@@ -20,7 +23,11 @@ def main():
             na+=str(dic[c])
     ina=int(na)
     p=a[0] + str(la) + na + str(ina+la) + str(ina*la) + a[2]
-    subprocess.run("xclip -selection clipboard", universal_newlines=True, input=p, shell=True)
+    myos = platform.system()
+    if myos == MACOS_RETURN:
+        subprocess.run("pbcopy", text=True, input=p)
+    else:
+        subprocess.run("xclip -selection clipboard", universal_newlines=True, input=p, shell=True)
     t = input("")
     if t == "Y":
         return
